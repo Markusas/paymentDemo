@@ -6,18 +6,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/payment")
 public class PaymentController {
 
-//    private PaymentRepository repository;
+    private final PaymentRepository repository;
 
-@GetMapping("/get/{id}")
-public Payment getPayment(@PathVariable Long id){
-    System.out.println(id);
-    return new Payment();
-}
+    public PaymentController(PaymentRepository repository) {
+        this.repository = repository;
+    }
+
+    @GetMapping("/get/payments")
+    public List<Payment> getAllPayments() {
+        return repository.findAll();
+    }
 
 
 }
