@@ -1,9 +1,16 @@
 package lt.mb.common;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
 public class Payment {
+
+    @Id
+    @GeneratedValue
     private long paymentId;
     private long personId;
     private BigDecimal amount;
