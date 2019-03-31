@@ -24,5 +24,9 @@ public class PaymentController {
         return repository.findAll();
     }
 
+    @GetMapping("/get/{id}")
+    public Payment getPayment(@PathVariable Long id){
+        return repository.findById(id).orElseThrow(() -> new PaymentNotFoundException(id));
+    }
 
 }
