@@ -1,4 +1,4 @@
-package lt.mb.payment;
+package lt.mb.payment.db;
 
 import lt.mb.common.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
