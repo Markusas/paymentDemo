@@ -1,4 +1,4 @@
-package lt.mb.person;
+package lt.mb.person.db;
 
 import lt.mb.common.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
