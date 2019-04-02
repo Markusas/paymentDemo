@@ -1,6 +1,7 @@
 package lt.mb.payment.contoller;
 
 import lt.mb.common.Payment;
+import lt.mb.common.Person;
 import lt.mb.payment.PaymentNotFoundException;
 import lt.mb.payment.db.PaymentRepository;
 import lt.mb.payment.service.PaymentService;
@@ -35,5 +36,11 @@ public class PaymentController {
     public Payment addPayment(@RequestBody Payment newPayment) {
         return service.addPayment(newPayment);
     }
+
+    @GetMapping("/getPayments")
+    public List<Person> getPayments(){
+        return service.getPersonByOfficialId();
+    }
+
 
 }
