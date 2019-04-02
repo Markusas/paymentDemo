@@ -42,5 +42,10 @@ public class PaymentController {
         return service.getPersonByOfficialId();
     }
 
+    @GetMapping("/{personOfficialId}")
+    public Person getPaymentsByOfficialId(@PathVariable String personOfficialId){
+        return service.getPaymentsByOfficialId(personOfficialId);
+    }
+
 
 }

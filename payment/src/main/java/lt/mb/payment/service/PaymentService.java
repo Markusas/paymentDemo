@@ -18,7 +18,7 @@ import java.util.List;
 public class PaymentService {
 
     public final PaymentRepository repository;
-    static final String URI = "http://localhost:8082/person/persons";
+    static final String URI = "http://localhost:8082/person";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -40,16 +40,20 @@ public class PaymentService {
         return repository.save(newPayment);
     }
 
-    public Payment getPaymentByOfficialId(String officialId){
-        return null;
-    }
-
     public List<Person> getPersonByOfficialId(){
-        ResponseEntity<List<Person>> resp = restTemplate.exchange(URI, HttpMethod.GET, null, new ParameterizedTypeReference<List<Person>>() {
+        ResponseEntity<List<Person>> resp = restTemplate.exchange(URI + "/persons", HttpMethod.GET, null, new ParameterizedTypeReference<List<Person>>() {
         });
-        List<Person> personList = resp.getBody();
-        return personList;
+        List<Person> personLists = resp.getBody();
+        return personLists;
     }
 
 
+    public Person getPaymentsByOfficialId(String officialId) {
+        ResponseEntity<Person> resp = restTemplate.exchange(URI + "/get/" + officialId, HttpMethod.GET, null, Person.class);
+        Person personList = resp.getBody();
+        String officialIdFromPersonList = personList.getOfficialId();
+        return personList;
+
+
+    }
 }
