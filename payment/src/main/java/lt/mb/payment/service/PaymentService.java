@@ -18,7 +18,7 @@ import java.util.List;
 public class PaymentService {
 
     public final PaymentRepository repository;
-    static final String URI = "http://localhost:8082/person";
+    static final String URI = "http://localhost:8082/person/persons";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -40,20 +40,35 @@ public class PaymentService {
         return repository.save(newPayment);
     }
 
-    public List<Person> getPersonByOfficialId(){
-        ResponseEntity<List<Person>> resp = restTemplate.exchange(URI + "/persons", HttpMethod.GET, null, new ParameterizedTypeReference<List<Person>>() {
-        });
-        List<Person> personLists = resp.getBody();
-        return personLists;
+    public String getAllPersons(){
+        ResponseEntity<String> resp = restTemplate.getForEntity(URI, String.class);
+
+        return resp.getBody();
+
+
+//        ResponseEntity<List<Person>> resp = restTemplate.exchange(URI, HttpMethod.GET, null, new ParameterizedTypeReference<List<Person>>() {
+//        });
+//        List<Person> personLists = resp.getBody();
+//        return personLists;
     }
 
 
-    public Person getPaymentsByOfficialId(String officialId) {
-        ResponseEntity<Person> resp = restTemplate.exchange(URI + "/get/" + officialId, HttpMethod.GET, null, Person.class);
-        Person personList = resp.getBody();
-        String officialIdFromPersonList = personList.getOfficialId();
-        return personList;
-
-
-    }
+//    public Person getPaymentsByOfficialId(String officialId) {
+//
+//        ResponseEntity<Person> resp = restTemplate.exchange(URI, HttpMethod.GET, null, Person.class);
+//        Person personList = resp.getBody();
+////            String officialIdFromPersonList = personList.getOfficialId();
+////            for (Person person : getAllPersons()) {
+////
+////                if (officialIdFromPersonList == officialId){
+////                    return person;
+////                }
+////        }
+//        return personList;
+//
+//
+//
+//
+//
+//    }
 }

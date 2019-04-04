@@ -2,8 +2,6 @@ package lt.mb.payment.contoller;
 
 import lt.mb.common.Payment;
 import lt.mb.common.Person;
-import lt.mb.payment.PaymentNotFoundException;
-import lt.mb.payment.db.PaymentRepository;
 import lt.mb.payment.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,15 +35,15 @@ public class PaymentController {
         return service.addPayment(newPayment);
     }
 
-    @GetMapping("/getPayments")
-    public List<Person> getPayments(){
-        return service.getPersonByOfficialId();
+    @GetMapping("/getAllPersons")
+    public String getAllPersons(){
+        return service.getAllPersons();
     }
 
-    @GetMapping("/{personOfficialId}")
-    public Person getPaymentsByOfficialId(@PathVariable String personOfficialId){
-        return service.getPaymentsByOfficialId(personOfficialId);
-    }
+//    @GetMapping("/{personOfficialId}")
+//    public Person getPaymentsByOfficialId(@PathVariable String personOfficialId){
+//        return service.getPaymentsByOfficialId(personOfficialId);
+//    }
 
 
 }
