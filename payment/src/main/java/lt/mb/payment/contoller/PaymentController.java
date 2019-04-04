@@ -36,14 +36,14 @@ public class PaymentController {
     }
 
     @GetMapping("/getAllPersons")
-    public String getAllPersons(){
+    public List<Person> getAllPersons(){
         return service.getAllPersons();
     }
 
-//    @GetMapping("/{personOfficialId}")
-//    public Person getPaymentsByOfficialId(@PathVariable String personOfficialId){
-//        return service.getPaymentsByOfficialId(personOfficialId);
-//    }
+    @GetMapping("/{personOfficialId}")
+    public List<Payment> getPaymentsByOfficialId(@PathVariable String personOfficialId){
+        return service.getPaymentsByOfficialId(personOfficialId);
+    }
 
 
 }

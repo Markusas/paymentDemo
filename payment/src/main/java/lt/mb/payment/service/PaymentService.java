@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -40,35 +41,24 @@ public class PaymentService {
         return repository.save(newPayment);
     }
 
-    public String getAllPersons(){
-        ResponseEntity<String> resp = restTemplate.getForEntity(URI, String.class);
-
-        return resp.getBody();
-
-
-//        ResponseEntity<List<Person>> resp = restTemplate.exchange(URI, HttpMethod.GET, null, new ParameterizedTypeReference<List<Person>>() {
-//        });
-//        List<Person> personLists = resp.getBody();
-//        return personLists;
+    public List<Person> getAllPersons() {
+        ResponseEntity<List<Person>> resp = restTemplate.exchange(URI, HttpMethod.GET, null, new ParameterizedTypeReference<List<Person>>() {
+        });
+        List<Person> personLists = resp.getBody();
+        return personLists;
     }
 
+    public List<Payment> getPaymentsByOfficialId(String officialId) {
+        for (Person person : getAllPersons()) {
 
-//    public Person getPaymentsByOfficialId(String officialId) {
-//
-//        ResponseEntity<Person> resp = restTemplate.exchange(URI, HttpMethod.GET, null, Person.class);
-//        Person personList = resp.getBody();
-////            String officialIdFromPersonList = personList.getOfficialId();
-////            for (Person person : getAllPersons()) {
-////
-////                if (officialIdFromPersonList == officialId){
-////                    return person;
-////                }
-////        }
-//        return personList;
-//
-//
-//
-//
-//
-//    }
+            if (officialId.equals(person.getOfficialId())) {
+                return getByPersonId(person.getId());
+            }
+        }
+        return Collections.emptyList();
+    }
+
+    public List<Payment> getByPersonId(Long PersonId) {
+        return repository.findByPersonId(PersonId);
+    }
 }
