@@ -2,12 +2,12 @@ package lt.mb.payment.service;
 
 import lt.mb.common.Payment;
 import lt.mb.common.Person;
+import lt.mb.payment.NoSuchOfficialId;
 import lt.mb.payment.PaymentNotFoundException;
 import lt.mb.payment.db.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -60,5 +60,14 @@ public class PaymentService {
 
     public List<Payment> getByPersonId(Long PersonId) {
         return repository.findByPersonId(PersonId);
+    }
+
+    public Payment addPaymentForPerson(Payment newPayment, String officialId) {
+        for (Person person : getAllPersons()) {
+            if (officialId.equals(person.getOfficialId())) {
+                return repository.save(newPayment);
+            }
+        }
+        return null;
     }
 }

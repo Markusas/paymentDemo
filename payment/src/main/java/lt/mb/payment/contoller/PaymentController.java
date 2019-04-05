@@ -45,5 +45,9 @@ public class PaymentController {
         return service.getPaymentsByOfficialId(personOfficialId);
     }
 
+    @PostMapping("/{personOfficialId}")
+    public Payment addPaymentForPerson(@RequestBody Payment newPayment, @PathVariable String personOfficialId){
+        return service.addPaymentForPerson(newPayment, personOfficialId);
+    }
 
 }

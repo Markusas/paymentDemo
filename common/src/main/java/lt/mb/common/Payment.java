@@ -2,6 +2,7 @@ package lt.mb.common;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,13 +11,13 @@ import java.time.LocalDate;
 public class Payment {
 
     @Id
-    @GeneratedValue
-    private long paymentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long paymentId;
     private long personId;
     private BigDecimal amount;
     private LocalDate date;
 
-    public void setPaymentId(long paymentId) {
+    public void setPaymentId(Long paymentId) {
         this.paymentId = paymentId;
     }
 
@@ -32,7 +33,7 @@ public class Payment {
         this.date = date;
     }
 
-    public long getPaymentId() {
+    public Long getPaymentId() {
         return paymentId;
     }
 
