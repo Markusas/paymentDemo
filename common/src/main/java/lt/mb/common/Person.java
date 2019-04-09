@@ -1,6 +1,14 @@
 package lt.mb.common;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Person {
+
+    @Id
+    @GeneratedValue
     private long id;
     private String officialId;
     private String name;

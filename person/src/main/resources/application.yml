@@ -1,2 +1,14 @@
 server:
-  port: 8081
+  port: 8082
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    url: jdbc:h2:mem:person
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+    platform: h2
